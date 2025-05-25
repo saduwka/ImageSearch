@@ -1,0 +1,23 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.historyList {
+    margin-top: 20px;
+    background-color: #fff;
+    height: fit-content;
+    color: #000;
+    border-radius: 5px;
+    text-align: center;
+}
+
+li {
+    list-style-type: none;
+    border-bottom: 1px solid #000;
+
+}
+
+li:last-child{
+    border: none;
+}

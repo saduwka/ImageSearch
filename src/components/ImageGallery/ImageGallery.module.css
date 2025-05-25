@@ -1,0 +1,43 @@
+.gallery {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    max-height: 70vh;
+    overflow-y: auto; 
+    justify-content: center;
+    padding: 10px;
+    scrollbar-color: #6f6f8e #e0e0e0; 
+}
+
+.gallery::-webkit-scrollbar {
+    width: 8px; 
+}
+
+.gallery::-webkit-scrollbar-track {
+    background: #e0e0e0; 
+    border-radius: 10px;
+}
+
+.gallery::-webkit-scrollbar-thumb {
+    background: #6f6f8e;
+    border-radius: 10px;
+}
+
+.gallery::-webkit-scrollbar-thumb:hover {
+    background: #26318f; 
+}
+
+.image {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    object-fit: cover;
+    transition: .3s ease;
+}
+
+.image:hover {
+    /* transform: scale(105%); */
+    box-shadow: 0 2px 4px 0 #26318f;
+
+}

@@ -1,0 +1,43 @@
+*, *:active{
+    outline: none;
+    box-shadow: none;
+}
+
+.searchForm {
+    display: flex;
+    justify-content: center;
+}
+
+.btn {
+    background-color: #fff;
+    color: #000;
+    border-radius: 0 10px 10px 0;
+    border: 2px solid gray;
+    transition: .3s ease;
+    border-left: 0;
+    
+}
+
+.btn:active {
+    background-color: inherit;
+    transform: none;
+    
+}
+
+.btn svg:hover {
+    background-color: #e0e0e0;
+    transform:scale(105%);
+}
+
+.userInput {
+    max-height: 38.69px;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    color: #000;
+    padding-left: 10px;
+    border-radius: 10px 0 0 10px;
+    border: 2px solid gray;
+    border-right: 0;
+}
+
