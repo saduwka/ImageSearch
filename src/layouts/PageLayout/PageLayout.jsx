@@ -8,14 +8,14 @@ import styles from "./PageLayout.module.css";
 
 
 
-const PageLayout = ({ query, setQuery, images, setSelectedImage, history, setFilter, selectedImage, loading, message }) => {
+const PageLayout = ({ query, setQuery, images, setSelectedImage, history, setFilter, selectedImage, loading, message, showMore }) => {
   return (
       <>
           <div className={styles.animatedBackground}></div>
           <div className={styles.container}>
-              <div className={styles.header}>
+              {/* <div className={styles.header}>
                   <Header setFilter={setFilter} />
-              </div>
+              </div> */}
               <div className={styles.wrapper}>
                   <div className={styles.mainContainer}>
                       <div className={styles.sidebar}>
@@ -25,7 +25,9 @@ const PageLayout = ({ query, setQuery, images, setSelectedImage, history, setFil
                           <Search query={query} setQuery={setQuery} />
                           {message && <p className={styles.message}>{message}</p>}
                           
-                          <ImageGallery images={images} setSelectedImage={setSelectedImage} loading={loading} />
+                          <ImageGallery images={images} setSelectedImage={setSelectedImage} loading={loading} showMore={showMore} />
+                          
+
                       </div>
                   </div>
               </div>

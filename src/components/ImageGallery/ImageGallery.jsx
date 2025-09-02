@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./ImageGallery.module.css";
 
-const ImageGallery = ({ images, setSelectedImage, loading }) => {
+const ImageGallery = ({ images, setSelectedImage, loading, showMore }) => {
   return (
     <div className={styles.gallery}>
       {loading && <div className={styles.loader}></div>}
@@ -16,7 +16,11 @@ const ImageGallery = ({ images, setSelectedImage, loading }) => {
             style={{ cursor: "pointer" }}
           />
         ))}
+        <div>
+        {images.length > 0 && <button onClick={showMore}>Show More</button>}
+        </div>
     </div>
+    
   );
 };
 
