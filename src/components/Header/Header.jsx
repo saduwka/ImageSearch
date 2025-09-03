@@ -1,14 +1,12 @@
-import React from "react";
-import styles from "./Header.module.css"
 
-const Header = ({ setFilter }) => {
+import styles from "./Header.module.css"
+import logo from '../../assets/logo.svg'
+
+const Header = () => {
   return (
     <header className={styles.headerWrapper}>
-      <div className={styles.headerBtn}>
-        <button onClick={() => setFilter("likes")}>Most Liked</button>
-        <button onClick={() => setFilter("views")}>Most Viewed</button>
-        <button onClick={() => setFilter("comments")}>Most Commented</button>
-      </div>
+      <img src={logo} alt="logo" />
+      <h1>Pixly</h1>
     </header>
   );
 };

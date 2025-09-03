@@ -2,20 +2,19 @@
     margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
-    max-height: 70vh;
-    overflow-y: auto; 
+    gap: 10px;
+    overflow-y: auto;
     justify-content: center;
-    padding: 10px;
-    scrollbar-color: #6f6f8e #e0e0e0; 
+    padding: 5px;
+    scrollbar-color: #6f6f8e #e0e0e0;
 }
 
 .gallery::-webkit-scrollbar {
-    width: 8px; 
+    width: 6px;
 }
 
 .gallery::-webkit-scrollbar-track {
-    background: #e0e0e0; 
+    background: #e0e0e0;
     border-radius: 10px;
 }
 
@@ -25,19 +24,97 @@
 }
 
 .gallery::-webkit-scrollbar-thumb:hover {
-    background: #26318f; 
+    background: #26318f;
 }
 
 .image {
-    width: 200px;
-    height: 200px;
+    width: 120px; /* меньше для мобильных */
+    height: 120px;
     border-radius: 10px;
     object-fit: cover;
     transition: .3s ease;
 }
 
 .image:hover {
-    /* transform: scale(105%); */
     box-shadow: 0 2px 4px 0 #26318f;
+}
 
+.showMore {
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(320deg, #26318f, #4a69bd, #6f6f8e, #1a237e);
+  background-size: 400% 400%;
+  animation: gradientShift 8s ease infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.showMore:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 0 8px rgba(74, 105, 189, 0.6), 0 0 16px rgba(38, 49, 143, 0.4);
+}
+
+.showMore:active:not(:disabled) {
+  transform: scale(0.95);
+  box-shadow: 0 0 4px rgba(74, 105, 189, 0.8);
+}
+
+.showMore:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.loaderSmall {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ===== Мобильная адаптация ===== */
+@media (max-width: 480px) {
+    .gallery {
+        gap: 8px;
+        padding: 5px;
+    }
+
+    .image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .showMore {
+    width: 100px;
+    height: 100px;
+    font-size: 12px;
+    }
+
+    .loaderSmall {
+        width: 20px;
+        height: 20px;
+    }
 }
