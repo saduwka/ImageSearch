@@ -17,8 +17,8 @@ This project is a web application for searching images using the Pixabay API.
 🔧 Installation & Setup
 	1.	Clone the repository
 
-git clone https://github.com/saduwka/image-search-app.git
-cd image-search-app
+git clone https://github.com/saduwka/ImageSearch.git
+cd ImageSearch
 
 
 	2.	Install dependencies
@@ -28,7 +28,8 @@ npm install
 
 	3.	Create a .env file and add your API key
 
-VITE_API_KEY=your_pixabay_api_key
+VITE_API_KEY=your_pixabay_api_key <br>
+VITE_UNSPLASH_KEY=your_unsplah_api_key
 
 
 	4.	Start the development server

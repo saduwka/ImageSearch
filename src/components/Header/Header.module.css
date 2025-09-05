@@ -4,8 +4,14 @@
     display: flex;
     gap: 5px;
     align-items: center;
+
+    img {
+        width: 25px;
+        height: 25px;
+    }
 }
 
 h1 {
     color: aliceblue;
+    font-size: 30px;
 }

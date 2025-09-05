@@ -3,163 +3,276 @@
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
     height: 100dvh;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
-  }
-  
-  .modal {
-  position: relative;
-  background: #1a1a1a; /* тёмный фон вместо белого */
-  padding: 20px;
-  border-radius: 12px;
-  max-width: 90%;
-  max-height: 90%;
-  overflow: hidden;
-  display: flex;
-  flex-direction: row; /* картинка слева, инфа справа */
-  gap: 20px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.8);
-  color: #f1f1f1;
+    backdrop-filter: blur(6px);
 }
 
+.modal {
+    position: relative;
+    background: #1a1a1a;
+    padding: 20px;
+    border-radius: 14px;
+    max-width: 95%;
+    max-height: 90%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85);
+    color: #f1f1f1;
+    animation: fadeIn 0.25s ease;
+}
+
+/* Обертка для картинки и лоадера */
+.imageWrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 70%;
+    max-height: 80vh;
+    margin: 0 auto;
+}
+
+/* Картинка */
 .fullImage {
-  max-width: 70%;
-  max-height: 80vh;
-  border-radius: 12px;
-  object-fit: contain;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: 12px;
+    object-fit: contain;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.fullImage.loaded {
+    opacity: 1;
+}
+
+/* Лоадер строго по центру картинки */
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #4a90e2;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    z-index: 2;
+}
+
+@keyframes spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 }
 
 .info {
-  flex: 1;
-  font-size: 14px;
-  color: #f1f1f1;
-  background: rgba(255, 255, 255, 0.05); 
-  padding: 15px;
-  border-radius: 8px;
-  line-height: 1.6;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(6px); 
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+    flex: 1;
+    font-size: 14px;
+    color: #eaeaea;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 8px;
+    line-height: 1.6;
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(6px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .buttons {
-  margin-top: 15px;
-  display: flex;
-  gap: 12px;
+    margin-top: auto;
+    display: flex;
+    gap: 12px;
 }
 
 .downloadBtn,
 .pixabayBtn {
-  text-decoration: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  font-weight: bold;
-  transition: 0.3s;
-  text-align: center;
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .downloadBtn {
-  background: #4caf50;
-  color: white;
+    background: #4caf50;
+    color: #fff;
 }
 
 .downloadBtn:hover {
-  background: #43a047;
+    background: #43a047;
+    transform: translateY(-2px);
 }
 
 .pixabayBtn {
-  background: #2196f3;
-  color: white;
+    background: #2196f3;
+    color: #fff;
 }
 
 .pixabayBtn:hover {
-  background: #1976d2;
+    background: #1976d2;
+    transform: translateY(-2px);
 }
 
 .closeBtn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: rgba(0, 0, 0, 0.6);
-  color: #fff;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  border-radius: 6px;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-  padding: 0;
-  transition: background 0.2s ease;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    transition: all 0.25s ease;
+    z-index: 1001;
+    outline: none;
 }
 
 .closeBtn:hover {
-  background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.8);
+    transform: rotate(90deg);
 }
 
-
-
-/* Мобильная адаптация */
-@media (max-width: 768px) {
-  .modal {
-    flex-direction: column; /* картинка сверху, инфа снизу */
-    max-width: 95%;
-    max-height: 95%;
-    padding: 15px;
-  }
-
-  .fullImage {
-    max-width: 100%;
-    max-height: 50vh;
-    margin-bottom: 15px;
-  }
-
-  .info {
-    flex: none;
-    width: 100%;
-    font-size: 13px;
-    padding: 12px;
-  }
-
-  .buttons {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .downloadBtn,
-  .pixabayBtn {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 480px) {
-  .modal {
-    margin: 20px;
+/* Стрелки (только десктоп) */
+.prevBtn,
+.nextBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-  }
+    justify-content: center;
+    transition: background 0.25s ease, transform 0.2s ease;
+    z-index: 1001;
+    outline: none;
+}
 
-  .info {
-    font-size: 12px;
-  }
+.prevBtn:hover,
+.nextBtn:hover {
+    background: rgba(0, 0, 0, 0.75);
+    transform: translateY(-50%) scale(1.1);
+}
 
-  .downloadBtn,
-  .pixabayBtn {
-    font-size: 13px;
-    width: 30%
-  }
+.prevBtn:focus,
+.nextBtn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.prevBtn {
+    left: 10px;
+}
+
+.nextBtn {
+    right: 10px;
+}
+
+/* 🔹 Невидимые зоны для мобилки */
+.mobileZone {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .modal {
+        flex-direction: column;
+        max-width: 100%;
+        max-height: fit-content;
+        border-radius: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .imageWrapper {
+        max-width: 100%;
+        max-height: 50vh;
+    }
+
+    .fullImage {
+        max-height: 50vh;
+    }
+
+    .info {
+        max-width: 100vw;
+        font-size: 13px;
+        padding: 12px;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .downloadBtn,
+    .pixabayBtn {
+        width: 93%;
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    /* скрываем стрелки на мобилке */
+    .prevBtn,
+    .nextBtn {
+        display: none;
+    }
+
+    /* зоны-клики */
+    .mobileZone {
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 50%;
+        z-index: 1000;
+    }
+
+    .leftZone {
+        left: 0;
+    }
+    .rightZone {
+        right: 0;
+    }
+}
+
+/* Анимации */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
