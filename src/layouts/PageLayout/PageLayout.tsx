@@ -1,11 +1,12 @@
-import {memo, useState} from "react";
+import { memo, useState } from "react";
 import Header from "../../components/Header/Header";
 import Search from "../../components/Search/Search";
 import ImageGallery from "../../components/ImageGallery/ImageGallery";
 import ImageModal from "../../components/ImageModal/ImageModal";
+import Loader from "../../components/Loader/Loader"; // <- обязательно импортировать
 
 import styles from "./PageLayout.module.css";
-import { AppImage } from "../../types";
+import { AppImage, SourceFilter } from "../../types";
 
 interface FiltersProps {
     filter: string;
@@ -14,8 +15,8 @@ interface FiltersProps {
     setImageType: (value: string) => void;
     orientation: string;
     setOrientation: (value: string) => void;
-    source: string;
-    setSource: (value: string) => void;
+    source: SourceFilter;
+    setSource: (value: SourceFilter) => void;
 }
 
 const Filters = memo(
@@ -30,43 +31,26 @@ const Filters = memo(
          setSource,
      }: FiltersProps) => (
         <div className={styles.filters}>
-            <select
-                value={filter}
-                onChange={(e) => setFilter(e.target.value)}
-                aria-label="Sort by"
-            >
-                <option value="popular">Popular</option>
-                <option value="latest">Latest</option>
-            </select>
-
-            <select
-                value={imageType}
-                onChange={(e) => setImageType(e.target.value)}
-                aria-label="Image type"
-            >
-                <option value="photo">Photo</option>
-                <option value="illustration">Illustration</option>
-                <option value="vector">Vector</option>
-            </select>
-
-            <select
-                value={orientation}
-                onChange={(e) => setOrientation(e.target.value)}
-                aria-label="Orientation"
-            >
-                <option value="">Any orientation</option>
-                <option value="horizontal">Horizontal</option>
-                <option value="vertical">Vertical</option>
-            </select>
-
-            <select
-                value={source}
-                onChange={(e) => setSource(e.target.value)}
-                aria-label="Image source"
-            >
+            {/*<select value={filter} onChange={(e) => setFilter(e.target.value)}>*/}
+            {/*    <option value="popular">Popular</option>*/}
+            {/*    <option value="latest">Latest</option>*/}
+            {/*</select>*/}
+            {/*<select value={imageType} onChange={(e) => setImageType(e.target.value)}>*/}
+            {/*    <option value="photo">Photo</option>*/}
+            {/*    <option value="illustration">Illustration</option>*/}
+            {/*    <option value="vector">Vector</option>*/}
+            {/*</select>*/}
+            {/*<select value={orientation} onChange={(e) => setOrientation(e.target.value)}>*/}
+            {/*    <option value="">Any orientation</option>*/}
+            {/*    <option value="horizontal">Horizontal</option>*/}
+            {/*    <option value="vertical">Vertical</option>*/}
+            {/*</select>*/}
+            <select value={source} onChange={(e) => setSource(e.target.value as SourceFilter)}>
                 <option value="both">Both</option>
                 <option value="pixabay">Pixabay</option>
                 <option value="unsplash">Unsplash</option>
+                <option value="pexels">Pexels</option>
+                <option value="wikimedia">Wikimedia</option>
             </select>
         </div>
     )
@@ -85,12 +69,14 @@ interface PageLayoutProps {
     setImageType: (value: string) => void;
     orientation: string;
     setOrientation: (value: string) => void;
-    source: string;
-    setSource: (value: string) => void;
+    source: SourceFilter;
+    setSource: (value: SourceFilter) => void;
     selectedImage: AppImage | null;
     loading: boolean;
+    loadingMore: boolean;
     message?: string;
     showMore: () => Promise<void>;
+    hasMore: boolean;
 }
 
 const PageLayout = ({
@@ -106,12 +92,14 @@ const PageLayout = ({
                         source,
                         setSource,
                         loading,
+                        loadingMore,
                         message,
                         showMore,
-                    }: any) => {
-
+                        hasMore,
+                    }: PageLayoutProps) => {
     const [selectedImage, setSelectedImage] = useState<AppImage | null>(null);
     const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0);
+
     return (
         <main>
             <div className={styles.animatedBackground} />
@@ -121,7 +109,6 @@ const PageLayout = ({
                         <Header />
                         <section className={styles.content}>
                             <Search query={query} setQuery={setQuery} />
-
                             <Filters
                                 filter={filter}
                                 setFilter={setFilter}
@@ -133,21 +120,22 @@ const PageLayout = ({
                                 setSource={setSource}
                             />
 
-                            {message && (
-                                <p className={styles.message} role="status">
-                                    {message}
-                                </p>
-                            )}
+                            {message && <p className={styles.message}>{message}</p>}
+
+                            {loading && <Loader />} {/* Показываем спиннер */}
 
                             <ImageGallery
                                 images={images}
                                 loading={loading}
+                                loadingMore={loadingMore} // 🔹 новый проп
+                                hasMore={hasMore}
                                 showMore={showMore}
                                 setSelectedImage={(image, index) => {
                                     setSelectedImage(image);
-                                    setSelectedImageIndex(index); // сохраняем индекс!
+                                    setSelectedImageIndex(index);
                                 }}
                             />
+
                         </section>
                     </div>
                 </div>
