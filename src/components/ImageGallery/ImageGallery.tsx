@@ -8,43 +8,51 @@ interface Props {
     loadingMore: boolean; // используем проп
     showMore: () => Promise<void>;
     hasMore: boolean;
+    message?: string;
 }
 
-const ImageGallery = ({ images, setSelectedImage, loading, loadingMore, showMore, hasMore }: Props) => {
+const ImageGallery = ({ images, setSelectedImage, loading, loadingMore, showMore, hasMore, message }: Props) => {
     const handleShowMore = async () => {
         if (!loadingMore) {
-            await showMore(); // подгрузка новых изображений
+            await showMore();
         }
     };
 
     return (
         <div className={styles.gallery}>
             {/* Центральный лоадер */}
+            <div className={styles.counter}>
+                {message && <p className={styles.message}>{message}</p>}
+            </div>
+
             {loading && <div className={styles.loader}></div>}
 
-            {/* Галерея */}
-            {!loading &&
-                images.map((image, index) => (
-                    <img
-                        key={image.id}
-                        src={image.previewURL}
-                        alt={image.tags}
-                        onClick={() => setSelectedImage(image, index)}
-                        className={styles.image}
-                        style={{ cursor: "pointer" }}
-                    />
-                ))}
+            <div className={styles.content}>
+                {/* Галерея */}
+                {!loading &&
+                    images.map((image, index) => (
+                        <img
+                            key={image.id}
+                            src={image.previewURL}
+                            alt={image.tags}
+                            onClick={() => setSelectedImage(image, index)}
+                            className={styles.image}
+                            style={{ cursor: "pointer" }}
+                        />
+                    ))}
 
-            {/* Кнопка подгрузки */}
-            {hasMore && (
-                <button
-                    className={styles.showMore}
-                    onClick={handleShowMore}
-                    disabled={loadingMore}
-                >
-                    {loadingMore ? <div className={styles.loaderSmall}></div> : "Show More"}
-                </button>
-            )}
+                {/* Кнопка подгрузки */}
+                {images.length > 0 && hasMore && (
+                    <button
+                        className={styles.showMore}
+                        onClick={handleShowMore}
+                        disabled={loadingMore}
+                    >
+                        {loadingMore ? <div className={styles.loaderSmall}></div> : "Show More"}
+                    </button>
+                )}
+            </div>
+
         </div>
     );
 };

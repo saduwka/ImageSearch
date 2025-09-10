@@ -41,10 +41,10 @@ const Home = () => {
             setPage(nextPage);
             setHasMore(data.images.length > 0);
 
-            setMessage(`Найдено: ${append ? images.length + data.images.length : data.images.length} изображений`);
+            setMessage(`Found: ${append ? images.length + data.images.length : data.images.length} images`);
         } catch (err) {
             console.error(err);
-            setMessage("Ошибка при загрузке изображений");
+            setMessage("Error fetching images. Please try again later.");
         } finally {
             append ? setLoadingMore(false) : setLoading(false);
         }

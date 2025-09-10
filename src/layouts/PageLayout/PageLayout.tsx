@@ -120,9 +120,8 @@ const PageLayout = ({
                                 setSource={setSource}
                             />
 
-                            {message && <p className={styles.message}>{message}</p>}
-
                             {loading && <Loader />} {/* Показываем спиннер */}
+
 
                             <ImageGallery
                                 images={images}
@@ -130,6 +129,7 @@ const PageLayout = ({
                                 loadingMore={loadingMore} // 🔹 новый проп
                                 hasMore={hasMore}
                                 showMore={showMore}
+                                message={message}
                                 setSelectedImage={(image, index) => {
                                     setSelectedImage(image);
                                     setSelectedImageIndex(index);

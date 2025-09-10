@@ -1,6 +1,6 @@
 .gallery {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 10px;
     overflow-y: auto;
     justify-content: center;
@@ -24,6 +24,21 @@
 
 .gallery::-webkit-scrollbar-thumb:hover {
     background: #26318f;
+}
+
+.counter {
+    text-align: center;
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    max-width:  100vw;
 }
 
 .image {

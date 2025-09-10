@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import styles from "./ImageModal.module.css";
 import { AppImage } from "../../types";
 
+
 interface Props {
     selectedImage: AppImage | null;
     setSelectedImage: (image: AppImage | null) => void;
